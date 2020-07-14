@@ -35,12 +35,26 @@ This package has been tested with the following Sensors:
 - [Stereolabs ZED Stereo camera](https://www.stereolabs.com/zed/)
 
 ## Software Requirements
-- Ubuntu 16.04
-- Cuda 9.0
-- cuDNN 7.6
-- [ZED SDK for Ubuntu 16.04 and CUDA 9.0](https://www.stereolabs.com/developers/release/#sdkdownloads_anchor)
-- ROS Kinetic
-- OpenCV 2.4 (follow [this](https://gist.github.com/sedovolosiy/6711123a9e5a73a6ce519e80338d0067) guide. You might have to add -D WITH_CUDA=OFF to the cmake command)
+- Ubuntu 18.04
+- Cuda 10.0
+- cuDNN 7.6.5
+- [ZED SDK 2.8.5 for Ubuntu 18.04 and CUDA 10.0](https://www.stereolabs.com/developers/release/#sdkdownloads_anchor). Note that SDK >= 3.0 does not work yet.
+- ROS Melodic
+- OpenCV >= 2.4 && <= 2.4.13.7 (follow [this](https://gist.github.com/sedovolosiy/6711123a9e5a73a6ce519e80338d0067) guide. You might have to add -D WITH_CUDA=OFF to the cmake command)
+
+## Installation ZED SDK
+First download the correct ZED SDK software. The code is tested with ZED SDK 2.8.5, but older versions might work too. Using ZED SDK >= 3.0 is not yet supported and will crash. Download ZED SDK for Cuda 10.0 and Ubuntu 18 from here: [link](https://www.stereolabs.com/developers/release/2.8/).
+
+Once downloaded follow [this](https://www.stereolabs.com/docs/installation/linux/) guide to install the ZED SDK. The installer might ask you some questions on wheter you want to install certain dependencies. At this moment I have replied with "y" to all questions.
+## Installation Cuda & CuDNN
+Once installing Cuda
+
+
+## Installation OpenCV
+
+
+
+
 
 ## Installation
 Create Catkin workspace, clone the repo and install dependencies:
@@ -50,7 +64,7 @@ Create Catkin workspace, clone the repo and install dependencies:
     cd catkin-ws
     catkin config --init --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cd src
-    git clone https://github.com/PhiAbs/spencer_people_tracking_yolo.git
+    git clone https://github.com/nmarcelis/spencer-yolo.git
     rosdep update
     rosdep install -r --from-paths . --ignore-src
     sudo apt-get install libsvm-dev
