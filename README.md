@@ -46,12 +46,45 @@ This package has been tested with the following Sensors:
 First download the correct ZED SDK software. The code is tested with ZED SDK 2.8.5, but older versions might work too. Using ZED SDK >= 3.0 is not yet supported and will crash. Download ZED SDK for Cuda 10.0 and Ubuntu 18 from here: [link](https://www.stereolabs.com/developers/release/2.8/).
 
 Once downloaded follow [this](https://www.stereolabs.com/docs/installation/linux/) guide to install the ZED SDK. The installer might ask you some questions on wheter you want to install certain dependencies. At this moment I have replied with "y" to all questions.
-## Installation Cuda & CuDNN
-Once installing Cuda
+## Installation Cuda
+First check your current Cuda version using one of the following commands:
 
+    nvcc --version
+    cat /usr/local/cuda/version.txt
+If your current Cuda version is not 10.0, remove it and continue this installation guide. If it is already 10.0, go to the CuDNN installation section.
+
+Download Cuda 10.0 from this [link](https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal) but do not yet follow the installation instructions found on that website. Instead follow this guide from Nvidia to set up everything correctly before installing: [link](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html). Once you have installed Cuda, download the patch found also on the Cuda download page and open it using the Ubuntu software installer. If the patch is installed, make sure you follow the post installation steps found in the Nvidia installation guide.
+
+## Installation CuDNN
+To install CuDNN you first need to verify if you have not already installed it. Use this to verify it:
+
+    cat /usr/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+If it says CUDNN_MAJOR 7, CUDNN_MINOR 6, CUDNN_PATCHLEVEL 5, then you have already installed the correct CuDNN version. If another version is present, remove this version. Go to the Nvidia CuDNN download site and download CuDNN 7.6.5 for Cuda 10.0: [link](https://developer.nvidia.com/rdp/cudnn-download). Login with your Nvidia account and accept the ethical AI option (if you consent). You have to download the "cuDNN Runtime Library for Ubuntu18.04 (Deb)" and "cuDNN Developer Library for Ubuntu18.04 (Deb)" files. The "cuDNN Code Samples and User Guide for Ubuntu18.04 (Deb)" is optional. You can install all the Debian files by opening it using the Ubuntu Software Installer. Verify the correct installation using the command above.
 
 ## Installation OpenCV
 
+    sudo apt-get install build-essential
+
+    sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+    
+    sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+    sudo apt update
+    sudo apt install libjasper1 libjasper-dev
+    
+    sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+    
+    cd ~ 
+    git clone https://github.com/opencv/opencv.git
+    cd opencv
+    git checkout 2.4
+    mkdir build
+    cd build
+    cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -D WITH_CUDA=OFF ..
+    make all -j$(nproc) # Uses all machine cores    
+    sudo make install
+    
+    pkg-config --modversion opencv      # Verify installation of correct version
 
 
 
