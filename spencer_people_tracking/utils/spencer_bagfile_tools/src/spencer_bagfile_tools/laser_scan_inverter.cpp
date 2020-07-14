@@ -46,7 +46,7 @@ using namespace boost;
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 
-shared_ptr<ros::Publisher> g_laserPublisher; 
+boost::shared_ptr<ros::Publisher> g_laserPublisher; 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void laserCallback(const sensor_msgs::LaserScan::ConstPtr& laserScanMsg)
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 
 	// Create output topic
 	ROS_INFO("Creating LaserScan publisher...");
-	g_laserPublisher = shared_ptr<ros::Publisher>(new ros::Publisher(nodeHandle.advertise<sensor_msgs::LaserScan>("inverted_laser", 512)));
+	g_laserPublisher = boost::shared_ptr<ros::Publisher>(new ros::Publisher(nodeHandle.advertise<sensor_msgs::LaserScan>("inverted_laser", 512)));
 
 	ros::spin();
 	return 0;

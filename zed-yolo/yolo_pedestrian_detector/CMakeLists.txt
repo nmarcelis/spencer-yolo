@@ -41,7 +41,7 @@ include_directories(${catkin_INCLUDE_DIRS})
 
 link_directories(${ZED_LIBRARY_DIR})
 link_directories(${CUDA_LIBRARY_DIRS})
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../libdarknet/)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../libdarknet/) #libdarknet
 link_directories(${OpenCV_LIBRARY_DIRS})
 
 FILE(GLOB_RECURSE SRC_FILES src/*.cpp)

@@ -33,6 +33,14 @@ project(spencer_bagfile_tools)
 
 find_package(catkin REQUIRED COMPONENTS roscpp std_msgs geometry_msgs nav_msgs image_transport image_geometry cv_bridge tf message_generation dynamic_reconfigure camera_calibration_parsers)
 
+#find_package( OpenCV REQUIRED core imgproc highgui)
+find_package(OpenCV 2)
+if(OpenCV_FOUND)
+  message(STATUS "Using OpenCV version ${OpenCV_VERSION} installed at: ${OpenCV_INCLUDE_DIRS}")
+  message(STATUS "OpenCV supported compute capabilities are: ${OpenCV_COMPUTE_CAPABILITIES}")
+  include_directories(${OpenCV_INCLUDE_DIRS})
+endif()
+
 add_message_files(
    FILES
    AdditionalOdometryData.msg        #  copied from former kindercar_odometry package
@@ -52,10 +60,15 @@ catkin_package()
 
 include_directories(${catkin_INCLUDE_DIRS})
 
+if(OpenCV_FOUND)
+  set(DETECTOR_LIBRARIES
+    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES}    # laser feature lib is linked here
+  )
+endif()
 
 # # #  panorama_builder executable (receives from and publishes to ROS) # # # 
 add_executable(panorama_builder src/spencer_bagfile_tools/panorama_builder.cpp)
-target_link_libraries(panorama_builder ${catkin_LIBRARIES})
+target_link_libraries(panorama_builder ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
 
 # # #  laser_scan_inverter executable (flips the signs in an inverted laser scan such that it can be used by laser_scan_matcher etc.) # # # 
@@ -70,7 +83,7 @@ target_link_libraries(pose_to_odometry ${catkin_LIBRARIES})
 
 # # #  publish_camera_info executable (loads calibration YAML file from disk and publishes it at given rate) # # # 
 add_executable(publish_camera_info src/spencer_bagfile_tools/publish_camera_info.cpp)
-target_link_libraries(publish_camera_info ${catkin_LIBRARIES})
+target_link_libraries(publish_camera_info ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 
 install(PROGRAMS

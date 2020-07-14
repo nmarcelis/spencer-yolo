@@ -34,8 +34,8 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 
-#include <Eigen/Core>
-#include <Eigen/Geometry>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
 
 #include <list>
 #include <boost/foreach.hpp>

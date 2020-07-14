@@ -31,7 +31,7 @@ project(spencer_tracking_utils)
 
 find_package(catkin REQUIRED COMPONENTS rospy roscpp tf spencer_tracking_msgs nav_msgs cmake_modules)
 
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 include_directories(${Eigen_INCLUDE_DIRS})
 
 #catkin_python_setup()

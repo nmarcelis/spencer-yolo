@@ -35,7 +35,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 find_package(catkin REQUIRED COMPONENTS rospy roscpp roslib tf spencer_tracking_msgs spencer_social_relation_msgs cmake_modules)
 
 find_package(LibSVM REQUIRED)
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 include_directories(${Eigen_INCLUDE_DIRS} ${LIBSVM_INCLUDE_DIR})
 
