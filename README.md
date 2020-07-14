@@ -63,6 +63,7 @@ To install CuDNN you first need to verify if you have not already installed it. 
 If it says CUDNN_MAJOR 7, CUDNN_MINOR 6, CUDNN_PATCHLEVEL 5, then you have already installed the correct CuDNN version. If another version is present, remove this version. Go to the Nvidia CuDNN download site and download CuDNN 7.6.5 for Cuda 10.0: [link](https://developer.nvidia.com/rdp/cudnn-download). Login with your Nvidia account and accept the ethical AI option (if you consent). You have to download the "cuDNN Runtime Library for Ubuntu18.04 (Deb)" and "cuDNN Developer Library for Ubuntu18.04 (Deb)" files. The "cuDNN Code Samples and User Guide for Ubuntu18.04 (Deb)" is optional. You can install all the Debian files by opening it using the Ubuntu Software Installer. Verify the correct installation using the command above.
 
 ## Installation OpenCV
+The Spencer People Tracking repository does not work yet with OpenCV >= 3.0, so we will have to install OpenCV 2.xxx. In this case we will install the latest version of OpenCV 2, which is 2.4.13.7. To install OpenCV I have used two websites as reference, namely [link1](https://stackoverflow.com/questions/53474508/how-to-install-opencv-2-4-7-for-python-ubuntu) and [link2](https://gist.github.com/arthurbeggs/06df46af94af7f261513934e56103b30). If it is not installing correctly, it is recommended to try installing the packages from both links.
 
     sudo apt-get install build-essential
 
