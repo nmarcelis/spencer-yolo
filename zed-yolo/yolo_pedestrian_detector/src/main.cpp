@@ -176,7 +176,10 @@ cv::Mat slMat2cvMat(sl::Mat &input) {
 }
 
 
+// Used for the Yolo detector
 void detectorThread(std::string cfg_file, std::string weights_file, float thresh) {
+
+    // Class Detector is from the yolo_v2_class.hpp file, in initializes the detector
     Detector detector(cfg_file, weights_file);
     std::shared_ptr<image_t> det_image;
     cv::Size const frame_size = cur_frame.size();
@@ -334,6 +337,8 @@ int main(int argc, char *argv[]) {
     exit_flag = false;
     new_data = false;
 
+    // The class thread represents a single thread of execution. Threads allow multiple functions to execute concurrently. 
+    // std::thread second (bar,0);  // spawn new thread that calls bar(0)
     std::thread detect_thread(detectorThread, cfg_file, weights_file, thresh);
 
     while (ros::ok()) {
