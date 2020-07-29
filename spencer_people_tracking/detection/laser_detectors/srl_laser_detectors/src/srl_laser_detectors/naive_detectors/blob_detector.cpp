@@ -42,7 +42,7 @@ namespace srl_laser_detectors {
 
 BlobDetector::BlobDetector(ros::NodeHandle& nodeHandle, ros::NodeHandle& privateNodeHandle) : Detector(nodeHandle, privateNodeHandle)
 {
-    ROS_INFO("Blob detector initialized!");
+    ROS_INFO("Blob detector initialized!!!");
 }
 
 void BlobDetector::detect(const Segments& segments, Labels& labels, Confidences& confidences) {
