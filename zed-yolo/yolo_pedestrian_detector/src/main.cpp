@@ -34,9 +34,14 @@
 #include "yolo_v2_class.hpp"    // https://github.com/AlexeyAB/darknet/blob/master/src/yolo_v2_class.hpp
 #include <opencv2/opencv.hpp>
 
-
+// A mutex is a lockable object that is designed to signal when critical sections of code need exclusive access, 
+// preventing other threads with the same protection from executing concurrently and access the same memory locations.
 std::mutex data_lock;
+
+// Current frame (Global variable)
 cv::Mat cur_frame;
+
+
 std::vector<bbox_t> result_vect;
 std::atomic<bool> exit_flag, new_data;
 
@@ -186,9 +191,17 @@ void detectorThread(std::string cfg_file, std::string weights_file, float thresh
 
     while (!exit_flag) {
         if (new_data) {
+
+            // Lock data
             data_lock.lock();
+
+            // Resize current image frame to correct yolo image size
             det_image = detector.mat_to_image_resize(cur_frame);
+
+            // Push image through yoo detector
             result_vect = detector.detect_resized(*det_image, frame_size.width, frame_size.height, thresh, false); // true
+
+            // Unlock data
             data_lock.unlock();
             new_data = false;
         } else sl::sleep_ms(1);
