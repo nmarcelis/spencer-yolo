@@ -344,11 +344,22 @@ int main(int argc, char *argv[]) {
     auto obj_names = objects_names_from_file(names_file);
 
     sl::Mat left, cur_cloud;
+
     zed.retrieveImage(left);
+
     zed.retrieveMeasure(cur_cloud, sl::MEASURE_XYZ);
-    slMat2cvMat(left).copyTo(cur_frame);
+
+
+    cur_frame = slMat2cvMat(left);
+
+	std::cout << "Joe werkt!" << std::endl;
+
+    //slMat2cvMat(left).copyTo(cur_frame);                // <--------- Is giving problems when using OpenCV 2.4 / 3.2
+
+
     exit_flag = false;
     new_data = false;
+
 
     // The class thread represents a single thread of execution. Threads allow multiple functions to execute concurrently. 
     // std::thread second (bar,0);  // spawn new thread that calls bar(0)

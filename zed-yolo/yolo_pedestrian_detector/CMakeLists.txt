@@ -11,7 +11,8 @@ SET(EXECUTABLE_OUTPUT_PATH ".")
 
 find_package(ZED 2 REQUIRED)
 find_package(CUDA ${ZED_CUDA_VERSION} EXACT REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 2.4.13.7 REQUIRED)
+
 
 # ROS
 find_package(catkin REQUIRED

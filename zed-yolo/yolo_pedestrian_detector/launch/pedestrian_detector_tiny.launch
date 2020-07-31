@@ -8,8 +8,9 @@
     <arg name="object_name"    	    default="person" />  <!-- this name has to comply with one of the coco classes -->
     <arg name="loop_rate_param"     default="20" />   
     <arg name="confidence_thresh"   default="0.25" />  <!-- Detections with a confidence lower than this threshold will be discarded -->
-    
-    <node name="yolo_pedestrian_detector" pkg="yolo_pedestrian_detector" type="yolo_pedestrian_detector" output="screen">
+    	<arg name="launch_prefix" default="xterm -e gdb --args"/>
+
+    <node name="yolo_pedestrian_detector" pkg="yolo_pedestrian_detector" type="yolo_pedestrian_detector" output="screen" launch-prefix="$(arg launch_prefix)">>
         <param name="names_file"          value="$(arg names_file)" />
 	<param name="cfg_file"            value="$(arg cfg_file)" />
 	<param name="weights_file"        value="$(arg weights_file)" />

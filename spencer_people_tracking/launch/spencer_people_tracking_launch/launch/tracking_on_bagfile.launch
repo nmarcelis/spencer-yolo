@@ -6,6 +6,8 @@
     
     <arg name="rear_rgbd" default="false"/>
     <arg name="rear_laser" default="false"/>
+
+    <arg name="yolo" default="true"/>
     
     <!-- Which RGB-D detector to use? Default setting (only upper-body) gives best results. Note that PCL+upper-body detector cannot be combined -->
     <arg name="use_pcl_detector" default="false"/>
@@ -67,6 +69,7 @@
     <!-- People tracking -->
     <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
         <arg name="rgbd" value="$(arg front_rgbd)"/>
+        <arg name="yolo" value="$(arg yolo)"/>
         <arg name="laser_low_confidence_detections" value="$(arg front_laser)"/>
     </include>
 
